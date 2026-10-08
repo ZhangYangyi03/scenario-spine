@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        # Deliberately without numpy or torch: the core is standard library, and a
+        # test run that quietly needs numpy would hide a dependency the README
+        # says is not there.
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+      - name: Test (stdlib only)
+        run: python -m pytest -q
+      - name: CLI smoke
+        run: |
+          python -m spine doctor
+          python -m spine odd --n 40
+      - name: Install with the optional extras
+        run: python -m pip install -e ".[test,data]"
+      - name: Test with numpy present
+        run: python -m pytest -q

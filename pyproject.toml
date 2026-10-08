@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scenario-spine"
+version = "0.1.0"
+description = "Scenario generation, an ODD coverage measure, a difficulty score calibrated against simulation, 3D label QC and a fleet/charging dispatcher -- with a MUSA/MTT GPU predictor"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [{name = "Yangyi Zhang"}]
+keywords = ["autonomous-driving", "sotif", "odd", "scenario-generation", "coverage", "difficulty-score", "label-quality", "fleet-dispatch", "musa", "mthreads"]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+data = ["numpy>=1.24"]
+gpu = ["torch>=2.2"]
+
+[project.scripts]
+spine = "spine.cli:main"
+
+[tool.setuptools]
+packages = ["spine"]
+
+[tool.setuptools.package-data]
+spine = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# The stdlib-only tests are the contract: the package imports and runs without
+# numpy, torch or a GPU, and the tests that need them skip themselves. Anything
+# that hard-required numpy would show up as a collection error on a bare install.
+addopts = "-q"

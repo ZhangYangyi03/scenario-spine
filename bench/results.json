@@ -1,0 +1,198 @@
+{
+ "corpus": {
+  "n_train": 200000,
+  "n_test": 30000,
+  "workers": 120,
+  "train_seed_range": [
+   0,
+   200000
+  ],
+  "test_seed_range": [
+   1000000,
+   1030000
+  ],
+  "seconds_train": 100.4,
+  "seconds_test": 19.3,
+  "ms_per_scenario_train": 0.502,
+  "ms_per_scenario_test": 0.644,
+  "collision_rate_train": 0.11606,
+  "collision_rate_test": 0.11213,
+  "hard_brake_rate_train": 0.13667
+ },
+ "coverage": {
+  "odd": "highway-pilot-v1",
+  "bins_per_axis": 4,
+  "n": 400,
+  "unaimed": {
+   "order2": 0.493238434,
+   "order1": 0.69444,
+   "cells": 1405
+  },
+  "aimed": {
+   "order2": 1.0,
+   "order1": 1.0,
+   "cells": 1405,
+   "n": 37
+  },
+  "equal_size": {
+   "n": 400
+  },
+  "unaimed_at_equal_size": 0.493238434,
+  "aimed_at_equal_size": 1.0,
+  "aiming_gain": 0.506762,
+  "scenarios_to_90pct_aimed": 37,
+  "scenarios_to_90pct_unaimed": ">4000"
+ },
+ "calibration": {
+  "n_train": 200000,
+  "n_test": 30000,
+  "default_weights": {
+   "time_budget": 0.22,
+   "visibility": 0.18,
+   "surface": 0.15,
+   "curvature": 0.12,
+   "occlusion": 0.13,
+   "traffic_density": 0.1,
+   "exposure": 0.1
+  },
+  "fitted_weights": {
+   "time_budget": 0.0,
+   "visibility": 0.0221,
+   "surface": 0.2551,
+   "curvature": 0.0815,
+   "occlusion": 0.0,
+   "traffic_density": 0.2123,
+   "exposure": 0.429
+  },
+  "weight_l1_change": 1.0928,
+  "constraints_hold": true,
+  "default": {
+   "score_range": [
+    1.1649,
+    9.1
+   ],
+   "mse_vs_risk_index": 0.127051,
+   "spearman_risk": 0.084113,
+   "auc_collision": 0.566584,
+   "spearman_min_ttc": -0.241871
+  },
+  "fitted": {
+   "score_range": [
+    1.1943,
+    6.1391
+   ],
+   "mse_vs_risk_index": 0.06774,
+   "spearman_risk": 0.35164,
+   "auc_collision": 0.678662,
+   "spearman_min_ttc": 0.01788
+  },
+  "components": [
+   "time_budget",
+   "visibility",
+   "surface",
+   "curvature",
+   "occlusion",
+   "traffic_density",
+   "exposure"
+  ],
+  "physics_on_rescaled_scale": {
+   "spearman_risk": 0.084143,
+   "auc_collision": 0.566594
+  }
+ },
+ "learned": {
+  "torch_available": true,
+  "device": "musa",
+  "torch_version": "2.2.0",
+  "feature_dim": 48,
+  "hidden": [
+   256,
+   256,
+   128
+  ],
+  "logistic_numpy": {
+   "auc_collision": 0.985828,
+   "seconds": 2.2
+  },
+  "mlp_collision": {
+   "seconds": 15.9,
+   "device": "musa",
+   "val_loss": 0.010126013308763504,
+   "val_epoch": 20,
+   "auc_collision": 0.999889,
+   "spearman_risk": 0.543156,
+   "spearman_min_ttc": 0.559992
+  },
+  "mlp_risk": {
+   "seconds": 12.5,
+   "device": "musa",
+   "val_loss": 0.0019443854689598083,
+   "val_epoch": 39,
+   "auc_collision": 0.999269,
+   "spearman_risk": 0.99667,
+   "spearman_min_ttc": 0.546067
+  },
+  "reliability_deciles": [
+   {
+    "decile": 1,
+    "n": 3000,
+    "predicted_mean": 1.0,
+    "measured_collision_rate": 0.99967
+   },
+   {
+    "decile": 2,
+    "n": 3000,
+    "predicted_mean": 0.1164,
+    "measured_collision_rate": 0.12167
+   },
+   {
+    "decile": 3,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 4,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 5,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 6,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 7,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 8,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 9,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   },
+   {
+    "decile": 10,
+    "n": 3000,
+    "predicted_mean": 0.0,
+    "measured_collision_rate": 0.0
+   }
+  ]
+ }
+}

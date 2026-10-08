@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/
+out/
+musa/*.o
+musa/predict
+musa/predict.exe
+musa/state/
+musa/state.pt
+bench/data/
+*.npz
+*.npy
+.coverage
+build/
+dist/
+*.egg-info/

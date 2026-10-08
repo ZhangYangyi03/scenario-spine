@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "scenario-spine: scenario generation, ODD coverage and a calibrated difficulty score for automated driving"
+abstract: >-
+  A scenario bench that generates driving scenarios from a description language,
+  measures pairwise interaction coverage of a declared ODD, fits a difficulty
+  score's weights to simulation, and evaluates a learned surrogate against an
+  analytic baseline. Includes a MUSA/MTT GPU implementation of the predictor's
+  forward pass, verified against a numpy reference.
+type: software
+authors:
+  - family-names: Zhang
+    given-names: Yangyi
+license: Apache-2.0
+keywords:
+  - autonomous driving
+  - scenario-based testing
+  - SOTIF
+  - operational design domain
+  - coverage
+version: 0.1.0
+date-released: "2026-10-08"
