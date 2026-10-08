@@ -65,8 +65,8 @@ def cmd_calibrate(args):
 
     tr = D.read_jsonl(os.path.join(DATA, "corpus_train.jsonl"))
     te = D.read_jsonl(os.path.join(DATA, "corpus_test.jsonl"))
-    Ctr, ytr, _, _, order = D.component_matrix(tr)
-    Cte, yte, ycol, _, _ = D.component_matrix(te)
+    Ctr, ytr, _, _, order = D.component_matrix(tr, arrays=False)
+    Cte, yte, ycol, _, _ = D.component_matrix(te, arrays=False)
     yttc = [-r["y"]["min_ttc_s"] for r in te]
     rep = calibrate.compare(Ctr, ytr, Cte, yte, ycol, yttc)
     model = rep.pop("model")

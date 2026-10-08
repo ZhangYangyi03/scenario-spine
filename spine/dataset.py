@@ -131,18 +131,35 @@ def matrices(rows: list) -> tuple:
     return X, ycol, yrisk, phys
 
 
-def component_matrix(rows: list):
-    """(C, y_risk, y_collision, physics) when the rows were built with
+def component_matrix(rows: list, arrays: bool = None):
+    """(C, y_risk, y_collision, physics, order) for rows built with
     components=True. Used by calibrate.py, which fits the weight vector of the
-    hand-built score to what the simulator actually did."""
-    import numpy as np
+    hand-built score to what the simulator actually did.
 
+    Returns lists by default and numpy arrays only when numpy is importable,
+    because the pure-Python calibrator is a supported path and a list-versus-array
+    return type that depended on the environment would be a trap for the caller.
+    Pass arrays=True to require numpy (and get an ImportError if it is absent).
+    """
     from . import difficulty
 
-    C = np.asarray([r["c"] for r in rows], dtype=np.float64)
-    yrisk = np.asarray([r["y"]["risk_index"] for r in rows], dtype=np.float64)
-    ycol = np.asarray([r["y"]["collision"] for r in rows], dtype=np.float64)
-    phys = np.asarray([r["physics"] for r in rows], dtype=np.float64)
+    C = [list(r["c"]) for r in rows]
+    yrisk = [float(r["y"]["risk_index"]) for r in rows]
+    ycol = [float(r["y"]["collision"]) for r in rows]
+    phys = [float(r["physics"]) if r["physics"] is not None else float("nan") for r in rows]
+    if arrays is None:
+        try:
+            import numpy  # noqa: F401
+
+            arrays = True
+        except Exception:
+            arrays = False
+    if arrays:
+        import numpy as np
+
+        return (np.asarray(C, dtype=np.float64), np.asarray(yrisk, dtype=np.float64),
+                np.asarray(ycol, dtype=np.float64), np.asarray(phys, dtype=np.float64),
+                list(difficulty.COMPONENT_ORDER))
     return C, yrisk, ycol, phys, list(difficulty.COMPONENT_ORDER)
 
 

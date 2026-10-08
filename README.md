@@ -149,10 +149,14 @@ out of reach is a measured quantity and not a caveat in prose.
 ## Install and run
 
 No dependencies are needed for the core: the generator, simulator, difficulty
-score, coverage measure, label QC and dispatcher are standard-library Python.
-numpy and torch are optional and only the tests that need them import them.
+score, the calibrator, the coverage measure, label QC and the dispatcher are
+standard-library Python. numpy and torch are optional, and that is checked rather
+than asserted: with numpy made genuinely unimportable (a meta-path finder raising
+ModuleNotFoundError, which is what a missing package looks like) the suite runs
+**52 passed, 1 skipped**, and `python -m spine calibrate` completes through its
+pure-Python path. CI runs the suite both with and without numpy for this reason.
 
-    python -m pytest                      # 53 tests, stdlib-only paths included
+    python -m pytest                      # 62 tests, stdlib-only paths included
     python -m spine doctor                # what this machine can run
     python -m spine corpus --train 20000  # build a corpus
     python -m spine calibrate             # fit the difficulty weights
